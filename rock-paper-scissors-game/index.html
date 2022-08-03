@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジャンケンゲーム</title>
+</head>
+
+<body>
+    <div>出す手を入力してください。</div>
+
+    <button id="MyHandRock">グー</button>
+    <button id="MyHandScissors">チョキ</button>
+    <button id="MyHandPapper">パー</button>
+
+    <div id="ResultArea"></div>
+
+    <script>
+        /**
+         * ジャンケンを開始する
+         */
+        function startGame(myHand) {
+            const otherSideHand = getOtherSideHand();
+
+
+            if (otherSideHand === "グー") {
+                // 相手の出した手がグーの場合
+
+                if (myHand === "グー") {
+                    // 自分の出した手がグーの場合
+                    renderResult(myHand, otherSideHand, "あいこ");
+                } else if (myHand === "チョキ") {
+                    // 自分の出した手がチョキの場合
+                    renderResult(myHand, otherSideHand, "まけ");
+                } else if (myHand === "パー") {
+                    // 自分の出した手がパーの場合
+                    renderResult(myHand, otherSideHand, "かち");
+                }
+            } else if (otherSideHand === "チョキ") {
+                // 相手の出した手がチョキの場合
+
+                if (myHand === "グー") {
+                    // 自分の出した手がグーの場合
+                    renderResult(myHand, otherSideHand, "かち");
+                } else if (myHand === "チョキ") {
+                    // 自分の出した手がチョキの場合
+                    renderResult(myHand, otherSideHand, "あいこ");
+                } else if (myHand === "パー") {
+                    // 自分の出した手がパーの場合
+                    renderResult(myHand, otherSideHand, "まけ");
+                }
+
+            } else if (otherSideHand === "パー") {
+                // 相手の出した手がパーの場合
+
+                if (myHand === "グー") {
+                    // 自分の出した手がグーの場合
+                    renderResult(myHand, otherSideHand, "まけ");
+                } else if (myHand === "チョキ") {
+                    // 自分の出した手がチョキの場合
+                    renderResult(myHand, otherSideHand, "かち");
+                } else if (myHand === "パー") {
+                    // 自分の出した手がパーの場合
+                    renderResult(myHand, otherSideHand, "あいこ");
+                }
+
+            }
+        }
+
+        /**
+         * 相手の手を取得する
+         */
+        function getOtherSideHand() {
+            const random = Math.floor(Math.random() * 3);
+
+            if (random === 0) {
+                return "グー";
+            } else if (random === 1) {
+                return "チョキ";
+            } else if (random === 2) {
+                return "パー";
+            }
+        }
+
+        /**
+         * 結果を表示する
+         */
+        function renderResult(myHand, otherSideHand, result) {
+            document.getElementById("ResultArea").innerText = `自分は${myHand}、相手は${otherSideHand}を出しました、${result}です。`;
+        }
+
+        // グーのボタンを押した場合
+        document.getElementById("MyHandRock").onclick = () => {
+            startGame("グー")
+        }
+
+        // チョキのボタンを押した場合
+        document.getElementById("MyHandScissors").onclick = () => {
+            startGame("チョキ")
+        }
+
+        // パーのボタンを押した場合
+        document.getElementById("MyHandPapper").onclick = () => {
+            startGame("パー")
+        }
+    </script>
+</body>
+
+</html>
